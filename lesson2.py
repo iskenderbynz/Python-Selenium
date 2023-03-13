@@ -19,7 +19,7 @@ def find():
     print(database.index(bul))
     menu()
 
-def findAll():
+def multipleDelete():
     deleteDb = []
     deleteDb = input("Toplu kayıt silmek için öğrenci numaralarını virgül (,) ile ayırarak belirtiniz.: ").split(",")
     i = 0
@@ -42,7 +42,7 @@ def menu():
     elif islem == "3":
         delete()
     elif islem == "4":
-        findAll()
+        multipleDelete()
     elif islem == "5":
         find()
    
