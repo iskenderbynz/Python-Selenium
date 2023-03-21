@@ -3,8 +3,45 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 
 
+menuSec = ""
+
+def menu():
+      print("------------------------------------------------------------------------------------------------------------------------------------------------------------------------")
+      print("1 - Kullanıcı adı ve şifre alanları boş geçildiğinde uyarı mesajı olarak 'Epic sadface: Username is required' gösterilmelidir.")
+      print("2 - Sadece şifre alanı boş geçildiğinde uyarı mesajı olarak 'Epic sadface: Password is required' gösterilmelidir.")
+      print("3 - Kullanıcı adı 'locked_out_user' şifre alanı 'secret_sauce' gönderildiğinde 'Epic sadface: Sorry, this user has been locked out.' mesajı gösterilmelidir.")
+      print("4 - Kullanıcı adı ve şifre alanları boş geçildiğinde bu iki inputun yanında da kırmızı 'X' ikonu çıkmalıdır. Daha sonra aşağıda çıkan uyarı mesajının kapatma butonuna tıklandığında bu 'X' ikonları kaybolmalıdır.")
+      print("5 - Kullanıcı adı 'standard_user' şifre 'secret_sauce' gönderildiğinde kullanıcı '/inventory.html' sayfasına gönderilmelidir.")
+      print("6 - Giriş yapıldıktan sonra kullanıcıya gösterilen ürün sayısı '6' adet olmalıdır.")
+      print("7 - Tüm Senaryoları Çalıştır.")
+      print("8 - Çıkış Yap")
+      print("------------------------------------------------------------------------------------------------------------------------------------------------------------------------")
+      menuSec = input("Testini başlatmak istediğiniz senaryoyu seçiniz : ")
+      if menuSec=="1":
+            testClass.login_control1(1)
+      if menuSec=="2":
+            testClass.login_control2(2)
+      if menuSec=="3":
+            testClass.login_control3(3)
+      if menuSec=="4":
+            testClass.login_control4(4)
+      if menuSec=="5":
+            testClass.login_control5(5)
+      if menuSec=="6":
+            testClass.login_control6(6)
+      if menuSec=="7":
+            testClass.login_control1(7)
+            testClass.login_control2(7)
+            testClass.login_control3(7)
+            testClass.login_control4(7)
+            testClass.login_control5(7)
+            testClass.login_control6(7)
+      if menuSec=="8":
+            quit()
+
+
 class Test_Kodlamaio:
-    def login_control1(self):  
+    def login_control1(self,menuSec):  
         driver = webdriver.Chrome(ChromeDriverManager().install())
         driver.maximize_window()    
         driver.get("https://www.saucedemo.com/")
@@ -12,11 +49,12 @@ class Test_Kodlamaio:
         loginBtn.click()
         errorMessage = driver.find_element(By.XPATH,"/html/body/div/div/div[2]/div[1]/div/div/form/div[3]/h3")
         testResult = errorMessage.text == "Epic sadface: Username is required"
-        print(f"Senaryo 1 Test Sonucu : {testResult}")
+        print(f"Senaryo 1 - Kullanıcı adı ve şifre alanları boş geçildiğinde uyarı mesajı olarak 'Epic sadface: Username is required' gösterilmelidir. : {testResult}")
         driver.close()
-        menu()
+        if menuSec != 7:
+            menu()
 
-    def login_control2(self):
+    def login_control2(self,menuSec):
             driver = webdriver.Chrome(ChromeDriverManager().install())
             driver.maximize_window()
             driver.get("https://www.saucedemo.com/")
@@ -28,11 +66,12 @@ class Test_Kodlamaio:
             loginBtn.click()
             errorMessage = driver.find_element(By.XPATH,"/html/body/div/div/div[2]/div[1]/div/div/form/div[3]/h3")
             testResult = errorMessage.text == "Epic sadface: Password is required"
-            print(f"Senaryo 2 Test Sonucu : {testResult}")
+            print(f"Senaryo 2 - Sadece şifre alanı boş geçildiğinde uyarı mesajı olarak 'Epic sadface: Password is required' gösterilmelidir. : {testResult}")
             driver.close()
-            menu()
+            if menuSec != 7:
+                menu()
     
-    def login_control3(self):
+    def login_control3(self,menuSec):
             driver = webdriver.Chrome(ChromeDriverManager().install())
             driver.maximize_window()
             driver.get("https://www.saucedemo.com/")
@@ -44,11 +83,12 @@ class Test_Kodlamaio:
             loginBtn.click()
             errorMessage = driver.find_element(By.XPATH,"/html/body/div/div/div[2]/div[1]/div/div/form/div[3]/h3")
             testResult = errorMessage.text == "Epic sadface: Sorry, this user has been locked out."
-            print(f"Senaryo 3 Test Sonucu : {testResult}")
+            print(f"Senaryo 3 - Kullanıcı adı 'locked_out_user' şifre alanı 'secret_sauce' gönderildiğinde 'Epic sadface: Sorry, this user has been locked out.' mesajı gösterilmelidir. : {testResult}")
             driver.close()
-            menu()
+            if menuSec != 7:
+                menu()
 
-    def login_control4(self):
+    def login_control4(self,menuSec):
             driver = webdriver.Chrome(ChromeDriverManager().install())
             driver.maximize_window()
             driver.get("https://www.saucedemo.com/")
@@ -65,11 +105,12 @@ class Test_Kodlamaio:
                 inputIcon = driver.find_elements(By.XPATH,"//*[name()='svg']")
             
             testResult = len(inputIcon) == 0
-            print(f"Senaryo 4 Test Sonucu : {testResult}")
+            print(f"Senaryo 4 - Kullanıcı adı ve şifre alanları boş geçildiğinde bu iki inputun yanında da kırmızı 'X' ikonu çıkmalıdır. Daha sonra aşağıda çıkan uyarı mesajının kapatma butonuna tıklandığında bu 'X' ikonları kaybolmalıdır. : {testResult}")
             driver.close()
-            menu()
+            if menuSec != 7:
+                 menu()
 
-    def login_control5(self):
+    def login_control5(self,menuSec):
             driver = webdriver.Chrome(ChromeDriverManager().install())
             driver.maximize_window()
             driver.get("https://www.saucedemo.com/")
@@ -81,11 +122,12 @@ class Test_Kodlamaio:
             loginBtn.click()
             pageActive = driver.find_element(By.XPATH,"/html/body/div/div/div/div[1]/div[2]/span")
             pageTitle = pageActive.text == "Products"
-            print(f"Senaryo 5 Test Sonucu : {pageTitle}")
+            print(f"Senaryo 5 - Kullanıcı adı 'standard_user' şifre 'secret_sauce' gönderildiğinde kullanıcı '/inventory.html' sayfasına gönderilmelidir. : {pageTitle}")
             driver.close()
-            menu()
+            if menuSec != 7:
+                menu()
 
-    def login_control6(self):
+    def login_control6(self,menuSec):
             driver = webdriver.Chrome(ChromeDriverManager().install())
             driver.maximize_window()
             driver.get("https://www.saucedemo.com/")
@@ -97,36 +139,13 @@ class Test_Kodlamaio:
             loginBtn.click()
             productCount = driver.find_elements(By.CLASS_NAME,"inventory_item_name")
             testResult = len(productCount) == 6
-            print(f"Senaryo 6 Test Sonucu : {testResult}")
+            print(f"Senaryo 6 - Giriş yapıldıktan sonra kullanıcıya gösterilen ürün sayısı '6' adet olmalıdır. : {testResult}")
             driver.close()
-            menu()
+            if menuSec != 7:
+                menu()
             
 
 testClass = Test_Kodlamaio()
 
-def menu():
-      print("------------------------------------------------------------------------------------------------------------------------------------------------------------------------")
-      print("1 - Kullanıcı adı ve şifre alanları boş geçildiğinde uyarı mesajı olarak 'Epic sadface: Username is required' gösterilmelidir.")
-      print("2 - Sadece şifre alanı boş geçildiğinde uyarı mesajı olarak 'Epic sadface: Password is required' gösterilmelidir.")
-      print("3 - Kullanıcı adı 'locked_out_user' şifre alanı 'secret_sauce' gönderildiğinde 'Epic sadface: Sorry, this user has been locked out.' mesajı gösterilmelidir.")
-      print("4 - Kullanıcı adı ve şifre alanları boş geçildiğinde bu iki inputun yanında da kırmızı 'X' ikonu çıkmalıdır. Daha sonra aşağıda çıkan uyarı mesajının kapatma butonuna tıklandığında bu 'X' ikonları kaybolmalıdır.")
-      print("5 - Kullanıcı adı 'standard_user' şifre 'secret_sauce' gönderildiğinde kullanıcı '/inventory.html' sayfasına gönderilmelidir.")
-      print("6 - Giriş yapıldıktan sonra kullanıcıya gösterilen ürün sayısı '6' adet olmalıdır.")
-      print("7 - Çıkış Yap")
-      print("------------------------------------------------------------------------------------------------------------------------------------------------------------------------")
-      menuSec = input("Testini başlatmak istediğiniz senaryoyu seçiniz : ")
-      if menuSec=="1":
-            testClass.login_control1()
-      if menuSec=="2":
-            testClass.login_control2()
-      if menuSec=="3":
-            testClass.login_control3()
-      if menuSec=="4":
-            testClass.login_control4()
-      if menuSec=="5":
-            testClass.login_control5()
-      if menuSec=="6":
-            testClass.login_control6()
-      if menuSec=="7":
-            quit()
+
 menu()
