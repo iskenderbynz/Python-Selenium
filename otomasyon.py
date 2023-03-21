@@ -3,6 +3,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from time import sleep
 from selenium.webdriver.common.by import By
 
+
 class Test_Kodlamaio:
     def login_control1(self):  
         driver = webdriver.Chrome(ChromeDriverManager().install())
