@@ -13,7 +13,8 @@ class Test_Kodlamaio:
         errorMessage = driver.find_element(By.XPATH,"/html/body/div/div/div[2]/div[1]/div/div/form/div[3]/h3")
         testResult = errorMessage.text == "Epic sadface: Username is required"
         print(f"Senaryo 1 Test Sonucu : {testResult}")
-        
+        driver.close()
+        menu()
 
     def login_control2(self):
             driver = webdriver.Chrome(ChromeDriverManager().install())
@@ -28,7 +29,8 @@ class Test_Kodlamaio:
             errorMessage = driver.find_element(By.XPATH,"/html/body/div/div/div[2]/div[1]/div/div/form/div[3]/h3")
             testResult = errorMessage.text == "Epic sadface: Password is required"
             print(f"Senaryo 2 Test Sonucu : {testResult}")
-           
+            driver.close()
+            menu()
     
     def login_control3(self):
             driver = webdriver.Chrome(ChromeDriverManager().install())
@@ -43,7 +45,8 @@ class Test_Kodlamaio:
             errorMessage = driver.find_element(By.XPATH,"/html/body/div/div/div[2]/div[1]/div/div/form/div[3]/h3")
             testResult = errorMessage.text == "Epic sadface: Sorry, this user has been locked out."
             print(f"Senaryo 3 Test Sonucu : {testResult}")
-           
+            driver.close()
+            menu()
 
     def login_control4(self):
             driver = webdriver.Chrome(ChromeDriverManager().install())
@@ -63,7 +66,8 @@ class Test_Kodlamaio:
             
             testResult = len(inputIcon) == 0
             print(f"Senaryo 4 Test Sonucu : {testResult}")
-           
+            driver.close()
+            menu()
 
     def login_control5(self):
             driver = webdriver.Chrome(ChromeDriverManager().install())
@@ -75,11 +79,11 @@ class Test_Kodlamaio:
             inputPass.send_keys("secret_sauce")
             loginBtn = driver.find_element(By.ID,"login-button")
             loginBtn.click()
-            sleep(5)
             pageActive = driver.find_element(By.XPATH,"/html/body/div/div/div/div[1]/div[2]/span")
             pageTitle = pageActive.text == "Products"
             print(f"Senaryo 5 Test Sonucu : {pageTitle}")
-           
+            driver.close()
+            menu()
 
     def login_control6(self):
             driver = webdriver.Chrome(ChromeDriverManager().install())
@@ -91,11 +95,12 @@ class Test_Kodlamaio:
             inputPass.send_keys("secret_sauce")
             loginBtn = driver.find_element(By.ID,"login-button")
             loginBtn.click()
-            sleep(5)
             productCount = driver.find_elements(By.CLASS_NAME,"inventory_item_name")
             testResult = len(productCount) == 6
             print(f"Senaryo 6 Test Sonucu : {testResult}")
-           
+            driver.close()
+            menu()
+            
 
 testClass = Test_Kodlamaio()
 
@@ -107,9 +112,9 @@ def menu():
       print("4 - Kullanıcı adı ve şifre alanları boş geçildiğinde bu iki inputun yanında da kırmızı 'X' ikonu çıkmalıdır. Daha sonra aşağıda çıkan uyarı mesajının kapatma butonuna tıklandığında bu 'X' ikonları kaybolmalıdır.")
       print("5 - Kullanıcı adı 'standard_user' şifre 'secret_sauce' gönderildiğinde kullanıcı '/inventory.html' sayfasına gönderilmelidir.")
       print("6 - Giriş yapıldıktan sonra kullanıcıya gösterilen ürün sayısı '6' adet olmalıdır.")
-      print("Testini başlatmak istediğiniz senaryoyu seçiniz.")
+      print("7 - Çıkış Yap")
       print("------------------------------------------------------------------------------------------------------------------------------------------------------------------------")
-      menuSec = input()
+      menuSec = input("Testini başlatmak istediğiniz senaryoyu seçiniz : ")
       if menuSec=="1":
             testClass.login_control1()
       if menuSec=="2":
@@ -122,4 +127,6 @@ def menu():
             testClass.login_control5()
       if menuSec=="6":
             testClass.login_control6()
+      if menuSec=="7":
+            quit()
 menu()
