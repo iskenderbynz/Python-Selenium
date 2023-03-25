@@ -6,6 +6,8 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.common.action_chains import ActionChains
 import pytest
+from pathlib import Path
+from datetime import date
 
 class Test_DemoClass:
     #her testten önce cağrılır
@@ -13,6 +15,10 @@ class Test_DemoClass:
         self.driver = webdriver.Chrome(ChromeDriverManager().install())
         self.driver.maximize_window()
         self.driver.get("https://www.saucedemo.com/")
+        self.folderPath = str(date.today())
+        Path(self.folderPath).mkdir(exist_ok=True)
+        #günün tarihini al bu tarih ile klasör var mı ? yoksa olustur.
+
 
     #her testten sonra çağrılır
     def teardown_method(self):
@@ -42,4 +48,5 @@ class Test_DemoClass:
         loginBtn = self.driver.find_element(By.ID,"login-button")
         loginBtn.click()
         errorMessage = self.driver.find_element(By.XPATH,"//*[@id='login_button_container']/div/form/div[3]/h3")
+        self.driver.save_screenshot(f"{self.folderPath}/test-invalid-login-{username}-{password}.png")
         assert errorMessage.text == "Epic sadface: Username and password do not match any user in this service"
