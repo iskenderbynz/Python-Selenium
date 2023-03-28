@@ -8,13 +8,15 @@ from selenium.webdriver.common.action_chains import ActionChains
 import pytest
 from pathlib import Path
 from datetime import date
+import openpyxl
+from constants import globalConstants
 
 class Test_DemoClass:
     #her testten önce cağrılır
     def setup_method(self):
         self.driver = webdriver.Chrome(ChromeDriverManager().install())
         self.driver.maximize_window()
-        self.driver.get("https://www.saucedemo.com/")
+        self.driver.get(globalConstants.URL)
         self.folderPath = str(date.today())
         Path(self.folderPath).mkdir(exist_ok=True)
         #günün tarihini al bu tarih ile klasör var mı ? yoksa olustur.
@@ -36,8 +38,20 @@ class Test_DemoClass:
     def test_demo2(self):
         assert True
 
+    def getData():
+        #veriyi al
+        excelFile = openpyxl.load_workbook("data/invalid_login.xlsx")
+        selectedSheet = excelFile["Sayfa1"]
+        totalRows = selectedSheet.max_row
+        data = []
+        for i in range(2,totalRows+1):
+            username = selectedSheet.cell(i,1).value
+            password = selectedSheet.cell(i,2).value
+            tupleData = (username,password)
+            data.append(tupleData)
+        return data
 
-    @pytest.mark.parametrize("username,password",[("1","1"),("kullaniciadim","sifrem")])
+    @pytest.mark.parametrize("username,password",getData())
     def test_invalid_login(self,username,password):
         self.waifForElementVisible((By.ID,"user-name"))
         inputUser = self.driver.find_element(By.ID,"user-name")
